@@ -8,7 +8,7 @@ result = requests.get(url)
 soup = BeautifulSoup(result.text, "html.parser")
 pages = soup.find("div", {"class": "s-pagination"}).find_all("a")
 last_pages = pages[-1].get_text(strip=True)
-final = int(last_pages)
+int(last_pages)
 
 def extract_job(html):
   title = html.find("div", {"class":"summary"}).find("a")["question-hyperlink"]
@@ -16,7 +16,7 @@ def extract_job(html):
 
 
 jobs = []
-for page in range(final):
+for page in range(last_pages):
     print(f"Scrapping SO Page: {page}")
     result = requests.get(f"{url}&pg={page + 1}")
     soup = BeautifulSoup(result.text, "html.parser")
@@ -24,3 +24,5 @@ for page in range(final):
     for result in results:
        job = extract_job(result)
        jobs.append(job)
+
+print(jobs)
