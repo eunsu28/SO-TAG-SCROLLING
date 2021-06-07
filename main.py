@@ -2,11 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 limited = 50
-url = "https://stackoverflow.com/questions/tagged/beautifulsoup"
+url = "https://stackoverflow.com/questions/tagged/beautifulsoup?tab=newest&pagesize=50"
 
-def extract_job(html):
-  title = html.find("div", {"class":"summary"}).find("a")["question-hyperlink"]
-  job_id = html.find("a")
 
 
 result = requests.get(url)
@@ -20,11 +17,11 @@ print(type(final))
 jobs = []
 for page in range(final):
     print(f"Scrapping SO Page: {page}")
-    result = requests.get(f"{url}&pg={page + 1}")
+    result = requests.get(f"{url}?tab=newest&page={page + 1}&pagesize=50")
     soup = BeautifulSoup(result.text, "html.parser")
-    results = soup.find_all("div", {"class":"-job"})
+    results = soup.find_all("div", {"class":"summary"})
     for result in results:
-       job = extract_job(result)
-       jobs.append(job)
+       jobs.append(page)
 
 print(type(final))
+print(jobs)
