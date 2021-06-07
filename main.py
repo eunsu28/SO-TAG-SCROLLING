@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-
-url = "https://stackoverflow.com/questions/tagged/beautifulsoup?tab=newest&pagesize=50"
+limited = 50
+url = "https://stackoverflow.com/questions/tagged/beautifulsoup"
 
 def extract_job(html):
   title = html.find("div", {"class":"summary"}).find("a")["question-hyperlink"]
@@ -12,14 +12,13 @@ def extract_job(html):
 result = requests.get(url)
 soup = BeautifulSoup(result.text, "html.parser")
 pages = soup.find("div", {"class": "s-pagination"}).find_all("a")
-last_pages = pages[-1].get_text(strip=True)
+last_pages = pages[-2].get_text(strip=True)
 final = int(last_pages)
-
 
 print(type(final))
 
 jobs = []
-for page in range(int(final)):
+for page in range(final):
     print(f"Scrapping SO Page: {page}")
     result = requests.get(f"{url}&pg={page + 1}")
     soup = BeautifulSoup(result.text, "html.parser")
@@ -28,3 +27,4 @@ for page in range(int(final)):
        job = extract_job(result)
        jobs.append(job)
 
+print(type(final))
