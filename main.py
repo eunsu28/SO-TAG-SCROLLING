@@ -21,7 +21,8 @@ for page in range(final):
     soup = BeautifulSoup(result.text, "html.parser")
     results = soup.find_all("div", {"class":"summary"})
     for result in results:
-       jobs.append(page)
+       title = result.find("a", {"class":"question-hyperlink"})
+       jobs.append(title)
 
-print(type(final))
 print(jobs)
+print(type(final))
