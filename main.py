@@ -15,9 +15,9 @@ final = int(last_pages)
 print(type(final))
 
 def extract_job(result):
-    title = result.find("a", {"class":"question-hyperlink"})
-    link = result.find("a", {"class":"question-hyperlink"}).find("href")
-    return {"title" : title, "applay_link":f"https://stackoverflow.com{link}" }
+    title = result.find("a", {"class":"question-hyperlink"}).text
+    link = result.find("a", {"class":"question-hyperlink"}).find("href").text
+    return {"title" : title.text, "applay_link":f"https://stackoverflow.com{link.text}" }
 
 jobs = []
 for page in range(final):
