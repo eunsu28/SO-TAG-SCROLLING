@@ -14,6 +14,11 @@ final = int(last_pages)
 
 print(type(final))
 
+def extract_job(result):
+    title = result.find("a", {"class":"question-hyperlink"})
+    link = result.find("a", {"class":"question-hyperlink"}).find("href")
+    return {"title" : title, "applay_link":f"https://stackoverflow.com{link}" }
+
 jobs = []
 for page in range(final):
     print(f"Scrapping SO Page: {page}")
@@ -21,8 +26,9 @@ for page in range(final):
     soup = BeautifulSoup(result.text, "html.parser")
     results = soup.find_all("div", {"class":"summary"})
     for result in results:
-       title = result.find("a", {"class":"question-hyperlink"})
-       jobs.append(title)
+       job = extract_job(result)
+       jobs.append(job)
+       
+
 
 print(jobs)
-print(type(final))
