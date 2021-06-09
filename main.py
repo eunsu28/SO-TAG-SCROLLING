@@ -16,8 +16,12 @@ print(type(final))
 
 def extract_job(result):
     title = result.find("a", {"class":"question-hyperlink"}).text
-    link = result.find("a", {"class":"question-hyperlink"}).find("href").text
-    return {"title" : title.text, "applay_link":f"https://stackoverflow.com{link.text}" }
+    link = result.find("a", {"class":"question-hyperlink"}).find("href")
+    if link == None:
+        link = "No link"
+    else:
+        pass
+    return {"title" : title, "applay_link":f"https://stackoverflow.com{link}" }
 
 jobs = []
 for page in range(final):
