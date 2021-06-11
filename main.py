@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import random
 
 limited = 50
 url = "https://stackoverflow.com/questions/tagged/beautifulsoup?tab=newest&pagesize=50"
@@ -16,12 +17,7 @@ print(type(final))
 
 def extract_job(result):
     title = result.find("a", {"class":"question-hyperlink"}).text
-    link = result.find("a", {"class":"question-hyperlink"}).find("href")
-    if link == None:
-        link = "/"
-    else:
-        pass
-    return {"title" : title, "applay_link":f"https://stackoverflow.com{link}" }
+    return {"title" : title}
 
 jobs = []
 for page in range(final):
@@ -34,5 +30,5 @@ for page in range(final):
        jobs.append(job)
        
 
-
+job = random.choice(jobs)
 print(jobs)
