@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import random
 from save import save_to_file
 
 limited = 50
