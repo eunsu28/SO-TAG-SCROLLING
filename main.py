@@ -1,11 +1,17 @@
-from save import save_to_file 
 import requests
 from bs4 import BeautifulSoup
+import csv
+
+def save_to_file(jobs):
+    file = open("jobs.csv", mode = "w")
+    writer = csv.writer(file)
+    writer.writerow(["title"])
+    for job in jobs:
+        writer.writerow(list(job.values()))
+    return 
 
 limited = 50
 url = "https://stackoverflow.com/questions/tagged/beautifulsoup?tab=newest&pagesize=50"
-
-
 
 result = requests.get(url)
 soup = BeautifulSoup(result.text, "html.parser")
