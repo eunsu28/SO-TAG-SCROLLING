@@ -1,6 +1,6 @@
+from save import save_to_file 
 import requests
 from bs4 import BeautifulSoup
-from save import save_to_file
 
 limited = 50
 url = "https://stackoverflow.com/questions/tagged/beautifulsoup?tab=newest&pagesize=50"
